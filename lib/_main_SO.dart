@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -40,8 +39,6 @@ class _MyHomePageState extends State<MyHomePage> {
   int _elementSelected = 0;
   String textElement = '0: Home';
 
-  String buttonPushed = 'Ninguno';
-
   Widget material() {
     return Scaffold(
       appBar: AppBar(
@@ -72,79 +69,18 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButton: FloatingActionButton(
         tooltip: 'Púlsame',
         onPressed: (() {
-          _floatingPush();
+          _likedChange();
         }),
         backgroundColor: Colors.red,
         child: _heart,
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('El texto pulsado',
-                style: TextStyle(
-                  color: Colors.red,
-                )),
-            Text('$buttonPushed',
-                style: const TextStyle(
-                  color: Colors.blueGrey,
-                )),
-            const Padding(padding: EdgeInsets.all(10)),
-            // BOTÓN CON ELEVACIÓN -> TIENE UNA SOMBRA
-            ElevatedButton(
-              onPressed: _elevatedButton,
-              child: const Text('ElevatedButton'),
-              style: ElevatedButton.styleFrom(
-                  elevation: 15, backgroundColor: Colors.amber),
+            Text(
+              textElement,
+              style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
             ),
-            const Padding(padding: EdgeInsets.all(10)),
-            // BOTÓN SIN SOMBRA
-            TextButton(
-              onPressed: _textButton,
-              child: const Text('TextButton'),
-              style: TextButton.styleFrom(
-                  foregroundColor: Colors.cyan,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20))),
-            ),
-            const Padding(padding: EdgeInsets.all(10)),
-            IconButton(
-              onPressed: _iconButton,
-              icon: const Icon(Icons.accessibility),
-              color: Colors.green,
-              iconSize: 30,
-            ),
-            const Padding(padding: EdgeInsets.all(10)),
-            // EL INK NOS PERMITE COLOREAR UNA ZONA DE LA PANTALLA A LA QUE LE PODEMOS AÑADIR CHILD
-            Ink(
-              decoration:
-                  ShapeDecoration(shape: CircleBorder(), color: Colors.green),
-              child: IconButton(
-                onPressed: _iconButton,
-                icon: const Icon(Icons.accessibility),
-                color: Colors.white,
-                iconSize: 30,
-              ),
-            ),
-            const Padding(padding: EdgeInsets.all(10)),
-            // BOTÓN PLANO CON SOLO BORDE
-            OutlinedButton(
-              onPressed: _outlinedButton,
-              child: const Text(
-                'OutlinedButton',
-                style: TextStyle(color: Colors.purple),
-              ),
-              style: OutlinedButton.styleFrom(
-                  side: const BorderSide(
-                      color: Colors.purple, style: BorderStyle.solid)),
-            ),
-            const Padding(padding: EdgeInsets.all(10)),
-            // BOTÓN CON ESTILO COPERTINO
-            CupertinoButton(
-              child: Text('CupertinoButton'),
-              onPressed: _cupertinoButton,
-              color: Colors.teal,
-            )
           ],
         ),
       ),
@@ -285,56 +221,6 @@ class _MyHomePageState extends State<MyHomePage> {
         case 2:
           textElement = '$_elementSelected : Estadísticas';
           break;
-      }
-    });
-  }
-
-  void _floatingPush() {
-    _whatButton('flo');
-  }
-
-  void _elevatedButton() {
-    _whatButton('ele');
-  }
-
-  void _textButton() {
-    _whatButton('text');
-  }
-
-  void _iconButton() {
-    _whatButton('icon');
-  }
-
-  void _outlinedButton() {
-    _whatButton('out');
-  }
-
-  void _cupertinoButton() {
-    _whatButton('cup');
-  }
-
-  void _whatButton(String button) {
-    setState(() {
-      switch (button) {
-        case 'flo':
-          buttonPushed = 'Floating action';
-          break;
-        case 'ele':
-          buttonPushed = 'ElevatedButton';
-          break;
-        case 'text':
-          buttonPushed = 'TextButton';
-          break;
-        case 'icon':
-          buttonPushed = 'IconButton';
-          break;
-        case 'out':
-          buttonPushed = 'OutlinedButton';
-          break;
-        case 'cup':
-          buttonPushed = 'CupertinoButton';
-          break;
-        default:
       }
     });
   }
