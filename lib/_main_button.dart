@@ -3,7 +3,6 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 void main() {
   runApp(MyApp());
@@ -82,56 +81,69 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Text(
-                  'Material Icon: ',
-                  style: TextStyle(
-                      color: Colors.deepPurple,
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold),
-                ),
-                Padding(padding: EdgeInsets.all(10)),
-                Icon(
-                  Icons.home,
-                  color: Colors.deepPurple,
-                )
-              ],
+            const Text('El texto pulsado',
+                style: TextStyle(
+                  color: Colors.red,
+                )),
+            Text('$buttonPushed',
+                style: const TextStyle(
+                  color: Colors.blueGrey,
+                )),
+            const Padding(padding: EdgeInsets.all(10)),
+            // BOTÓN CON ELEVACIÓN -> TIENE UNA SOMBRA
+            ElevatedButton(
+              onPressed: _elevatedButton,
+              child: const Text('ElevatedButton'),
+              style: ElevatedButton.styleFrom(
+                  elevation: 15, backgroundColor: Colors.amber),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Text(
-                  'Cupertino Icon: ',
-                  style: TextStyle(
-                      color: Colors.deepOrange,
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold),
-                ),
-                Padding(padding: EdgeInsets.all(10)),
-                Icon(
-                  CupertinoIcons.home,
-                  color: Colors.deepOrange,
-                )
-              ],
+            const Padding(padding: EdgeInsets.all(10)),
+            // BOTÓN SIN SOMBRA
+            TextButton(
+              onPressed: _textButton,
+              child: const Text('TextButton'),
+              style: TextButton.styleFrom(
+                  foregroundColor: Colors.cyan,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20))),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Text(
-                  'FontAwesome Icon: ',
-                  style: TextStyle(
-                      color: Colors.indigoAccent,
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold),
-                ),
-                Padding(padding: EdgeInsets.all(10)),
-                Icon(
-                  FontAwesomeIcons.house,
-                  color: Colors.indigoAccent,
-                )
-              ],
+            const Padding(padding: EdgeInsets.all(10)),
+            IconButton(
+              onPressed: _iconButton,
+              icon: const Icon(Icons.accessibility),
+              color: Colors.green,
+              iconSize: 30,
+            ),
+            const Padding(padding: EdgeInsets.all(10)),
+            // EL INK NOS PERMITE COLOREAR UNA ZONA DE LA PANTALLA A LA QUE LE PODEMOS AÑADIR CHILD
+            Ink(
+              decoration: const ShapeDecoration(
+                  shape: CircleBorder(), color: Colors.green),
+              child: IconButton(
+                onPressed: _iconButton,
+                icon: const Icon(Icons.accessibility),
+                color: Colors.white,
+                iconSize: 30,
+              ),
+            ),
+            const Padding(padding: EdgeInsets.all(10)),
+            // BOTÓN PLANO CON SOLO BORDE
+            OutlinedButton(
+              onPressed: _outlinedButton,
+              style: OutlinedButton.styleFrom(
+                  side: const BorderSide(
+                      color: Colors.purple, style: BorderStyle.solid)),
+              child: const Text(
+                'OutlinedButton',
+                style: TextStyle(color: Colors.purple),
+              ),
+            ),
+            const Padding(padding: EdgeInsets.all(10)),
+            // BOTÓN CON ESTILO COPERTINO
+            CupertinoButton(
+              onPressed: _cupertinoButton,
+              color: Colors.teal,
+              child: const Text('CupertinoButton'),
             )
           ],
         ),
