@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       title: 'ScaffoldApp',
       debugShowCheckedModeBanner: false,
-      home: MyHomePage(title: 'Stepper Home'),
+      home: MyHomePage(title: 'Textos Home'),
     );
   }
 }
@@ -43,17 +43,6 @@ class _MyHomePageState extends State<MyHomePage> {
   String textElement = '0: Home';
 
   String buttonPushed = 'Ninguno';
-
-  // LISTA DE STEPPER
-  List<Step> steps = [
-    Step(title: Text('Caja 1'), content: Text('Contenido caja 1')),
-    Step(title: Text('Caja 2'), content: Text('Contenido caja 2')),
-    Step(title: Text('Caja 3'), content: Text('Contenido caja 3')),
-    Step(title: Text('Caja 4'), content: Text('Contenido caja 4')),
-    Step(title: Text('Caja 5'), content: Text('Contenido caja 5')),
-  ];
-
-  int _currentStep = 0;
 
   Widget material() {
     return Scaffold(
@@ -94,15 +83,40 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              'Stepper',
-              style: Theme.of(context).textTheme.headline5,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  'Assets/Images/images.png',
+                  width: 150,
+                )
+              ],
             ),
-            Stepper(
-              steps: steps,
-              currentStep: _currentStep,
-              onStepContinue: _pasoSiguiente,
-              onStepCancel: _pasoAnterior,
+            Container(
+              height: 100,
+              width: MediaQuery.of(context).size.width / 1.2,
+              color: Colors.black,
+              child: const Text(
+                'Esto es un texto de prueba',
+                style: TextStyle(
+                    color: Colors.red,
+                    fontSize: 35,
+                    fontWeight: FontWeight.bold,
+                    fontStyle: FontStyle.italic,
+                    fontFamily: 'Lugrasimo'),
+                textAlign: TextAlign.left,
+                // overflow: TextOverflow.clip, -> corta el texto cuando llega al tamaño del contenedor
+                overflow: TextOverflow
+                    .ellipsis, //-> añade tres puntos cuando llega al tamaño del contenedor
+                // overflow: TextOverflow.fade, -> difumina el texto que se queda fuera del contenedor
+                // overflow: TextOverflow.visible, -> saca el texto aunque sea fuera del contenedor
+              ),
+            ),
+            const Padding(padding: EdgeInsets.all(10)),
+            Text(
+              'Texto desde google font',
+              style: GoogleFonts.pacifico(
+                  color: Colors.purple, fontWeight: FontWeight.normal),
             )
           ],
         ),
@@ -295,18 +309,6 @@ class _MyHomePageState extends State<MyHomePage> {
           break;
         default:
       }
-    });
-  }
-
-  void _pasoSiguiente() {
-    setState(() {
-      _currentStep++;
-    });
-  }
-
-  void _pasoAnterior() {
-    setState(() {
-      _currentStep--;
     });
   }
 }

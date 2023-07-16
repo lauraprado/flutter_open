@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       title: 'ScaffoldApp',
       debugShowCheckedModeBanner: false,
-      home: MyHomePage(title: 'Stepper Home'),
+      home: MyHomePage(title: 'Container Home'),
     );
   }
 }
@@ -43,17 +43,6 @@ class _MyHomePageState extends State<MyHomePage> {
   String textElement = '0: Home';
 
   String buttonPushed = 'Ninguno';
-
-  // LISTA DE STEPPER
-  List<Step> steps = [
-    Step(title: Text('Caja 1'), content: Text('Contenido caja 1')),
-    Step(title: Text('Caja 2'), content: Text('Contenido caja 2')),
-    Step(title: Text('Caja 3'), content: Text('Contenido caja 3')),
-    Step(title: Text('Caja 4'), content: Text('Contenido caja 4')),
-    Step(title: Text('Caja 5'), content: Text('Contenido caja 5')),
-  ];
-
-  int _currentStep = 0;
 
   Widget material() {
     return Scaffold(
@@ -94,16 +83,62 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              'Stepper',
-              style: Theme.of(context).textTheme.headline5,
+            Container(
+              color: Colors.blue,
+              margin: const EdgeInsets.only(bottom: 10),
+              child: const Text('Contenedor 1'),
             ),
-            Stepper(
-              steps: steps,
-              currentStep: _currentStep,
-              onStepContinue: _pasoSiguiente,
-              onStepCancel: _pasoAnterior,
-            )
+            Container(
+              color: Colors.green,
+              margin: const EdgeInsets.only(bottom: 10),
+              width: 40,
+              height: 40,
+              child: const Text('Contenedor 2'),
+            ),
+            Container(
+              margin: const EdgeInsets.only(bottom: 10),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.yellow,
+              ),
+              child: const Text('Contenedor 3'),
+            ),
+            Container(
+              margin: const EdgeInsets.only(bottom: 10),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.yellow[800],
+              ),
+              padding: const EdgeInsets.all(40),
+              child: const Text('Contenedor 4'),
+            ),
+            Container(
+              margin: const EdgeInsets.only(bottom: 10),
+              decoration: BoxDecoration(
+                  border: Border.all(
+                      color: Colors.purple, width: 1, style: BorderStyle.solid),
+                  color: Colors.purple[500],
+                  borderRadius: BorderRadius.all(Radius.circular(10))),
+              padding: const EdgeInsets.all(40),
+              child: const Text('Contenedor 4'),
+            ),
+            Container(
+              color: Colors.grey,
+              height: 60,
+              width: 60,
+              margin: const EdgeInsets.only(bottom: 10),
+              alignment: Alignment.bottomLeft,
+              child: const Icon(Icons.car_rental),
+            ),
+            Container(
+              color: Colors.grey,
+              height: 60,
+              width: 60,
+              margin: const EdgeInsets.only(bottom: 10),
+              alignment: const Alignment(0.5,
+                  -0.5), // el centro de la pantalla es el 0,0 -> puede salirse del container
+              child: const Icon(Icons.home),
+            ),
           ],
         ),
       ),
@@ -295,18 +330,6 @@ class _MyHomePageState extends State<MyHomePage> {
           break;
         default:
       }
-    });
-  }
-
-  void _pasoSiguiente() {
-    setState(() {
-      _currentStep++;
-    });
-  }
-
-  void _pasoAnterior() {
-    setState(() {
-      _currentStep--;
     });
   }
 }

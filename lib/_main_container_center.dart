@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       title: 'ScaffoldApp',
       debugShowCheckedModeBanner: false,
-      home: MyHomePage(title: 'Stepper Home'),
+      home: MyHomePage(title: 'Center Home'),
     );
   }
 }
@@ -43,17 +43,6 @@ class _MyHomePageState extends State<MyHomePage> {
   String textElement = '0: Home';
 
   String buttonPushed = 'Ninguno';
-
-  // LISTA DE STEPPER
-  List<Step> steps = [
-    Step(title: Text('Caja 1'), content: Text('Contenido caja 1')),
-    Step(title: Text('Caja 2'), content: Text('Contenido caja 2')),
-    Step(title: Text('Caja 3'), content: Text('Contenido caja 3')),
-    Step(title: Text('Caja 4'), content: Text('Contenido caja 4')),
-    Step(title: Text('Caja 5'), content: Text('Contenido caja 5')),
-  ];
-
-  int _currentStep = 0;
 
   Widget material() {
     return Scaffold(
@@ -91,22 +80,16 @@ class _MyHomePageState extends State<MyHomePage> {
         child: _heart,
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Stepper',
-              style: Theme.of(context).textTheme.headline5,
+          // multiplica el height/width del child por el valor que pongamos y que puede ser decimal
+          widthFactor: 0.5,
+          heightFactor: 3,
+          child: Container(
+            color: Colors.black,
+            child: const Text(
+              'Texto en container',
+              style: TextStyle(color: Colors.red, fontSize: 30),
             ),
-            Stepper(
-              steps: steps,
-              currentStep: _currentStep,
-              onStepContinue: _pasoSiguiente,
-              onStepCancel: _pasoAnterior,
-            )
-          ],
-        ),
-      ),
+          )),
       bottomNavigationBar: BottomNavigationBar(
           backgroundColor: Colors.red,
           items: const [
@@ -295,18 +278,6 @@ class _MyHomePageState extends State<MyHomePage> {
           break;
         default:
       }
-    });
-  }
-
-  void _pasoSiguiente() {
-    setState(() {
-      _currentStep++;
-    });
-  }
-
-  void _pasoAnterior() {
-    setState(() {
-      _currentStep--;
     });
   }
 }

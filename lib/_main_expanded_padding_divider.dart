@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       title: 'ScaffoldApp',
       debugShowCheckedModeBanner: false,
-      home: MyHomePage(title: 'Stepper Home'),
+      home: MyHomePage(title: 'Expanded Home'),
     );
   }
 }
@@ -43,17 +43,6 @@ class _MyHomePageState extends State<MyHomePage> {
   String textElement = '0: Home';
 
   String buttonPushed = 'Ninguno';
-
-  // LISTA DE STEPPER
-  List<Step> steps = [
-    Step(title: Text('Caja 1'), content: Text('Contenido caja 1')),
-    Step(title: Text('Caja 2'), content: Text('Contenido caja 2')),
-    Step(title: Text('Caja 3'), content: Text('Contenido caja 3')),
-    Step(title: Text('Caja 4'), content: Text('Contenido caja 4')),
-    Step(title: Text('Caja 5'), content: Text('Contenido caja 5')),
-  ];
-
-  int _currentStep = 0;
 
   Widget material() {
     return Scaffold(
@@ -91,19 +80,67 @@ class _MyHomePageState extends State<MyHomePage> {
         child: _heart,
       ),
       body: Center(
-        child: Column(
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              'Stepper',
-              style: Theme.of(context).textTheme.headline5,
+            Padding(
+              // crea un padding externo
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                padding: const EdgeInsets.all(
+                    0), // margen en todos los lados iguales
+                color: Colors.purple,
+                child: const Text('E'),
+              ),
             ),
-            Stepper(
-              steps: steps,
-              currentStep: _currentStep,
-              onStepContinue: _pasoSiguiente,
-              onStepCancel: _pasoAnterior,
-            )
+            Container(
+              padding:
+                  const EdgeInsets.all(10), // margen en todos los lados iguales
+              color: Colors.green,
+              child: const Text('A'),
+            ),
+            Expanded(
+              child: Container(
+                padding: const EdgeInsets.all(10),
+                color: Colors.blue,
+                child: const Text('B'),
+              ),
+            ),
+            const Divider(
+              color: Colors.purple,
+              indent: 40,
+              endIndent: 40,
+              thickness: 50,
+              height: 1,
+            ),
+            Expanded(
+              // con expanded le decimos que se extienda todo el espacio libre del children
+              flex: 2,
+              // si no marcamos el flex todos los expanded tendrán el mismo tamaño
+              child: Container(
+                padding: const EdgeInsets.all(10),
+                color: Colors.red,
+                child: const Text('C'),
+              ),
+            ),
+            Container(
+              padding:
+                  const EdgeInsets.all(0), // margen en todos los lados iguales
+              color: Colors.yellow,
+              child: const Text('D'),
+            ),
+            Container(
+              padding: const EdgeInsets.fromLTRB(
+                  5, 20, 5, 20), // margen en todos los lados iguales
+              color: Colors.pink,
+              child: const Text('F'),
+            ),
+            Container(
+              padding: const EdgeInsets.only(
+                  top: 50), // margen en todos los lados iguales
+              color: Colors.brown,
+              child: const Text('G'),
+            ),
           ],
         ),
       ),
@@ -295,18 +332,6 @@ class _MyHomePageState extends State<MyHomePage> {
           break;
         default:
       }
-    });
-  }
-
-  void _pasoSiguiente() {
-    setState(() {
-      _currentStep++;
-    });
-  }
-
-  void _pasoAnterior() {
-    setState(() {
-      _currentStep--;
     });
   }
 }

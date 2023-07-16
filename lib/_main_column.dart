@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       title: 'ScaffoldApp',
       debugShowCheckedModeBanner: false,
-      home: MyHomePage(title: 'Stepper Home'),
+      home: MyHomePage(title: 'Columnas y filas Home'),
     );
   }
 }
@@ -43,17 +43,6 @@ class _MyHomePageState extends State<MyHomePage> {
   String textElement = '0: Home';
 
   String buttonPushed = 'Ninguno';
-
-  // LISTA DE STEPPER
-  List<Step> steps = [
-    Step(title: Text('Caja 1'), content: Text('Contenido caja 1')),
-    Step(title: Text('Caja 2'), content: Text('Contenido caja 2')),
-    Step(title: Text('Caja 3'), content: Text('Contenido caja 3')),
-    Step(title: Text('Caja 4'), content: Text('Contenido caja 4')),
-    Step(title: Text('Caja 5'), content: Text('Contenido caja 5')),
-  ];
-
-  int _currentStep = 0;
 
   Widget material() {
     return Scaffold(
@@ -90,22 +79,53 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Colors.red,
         child: _heart,
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Stepper',
-              style: Theme.of(context).textTheme.headline5,
-            ),
-            Stepper(
-              steps: steps,
-              currentStep: _currentStep,
-              onStepContinue: _pasoSiguiente,
-              onStepCancel: _pasoAnterior,
-            )
-          ],
-        ),
+      // TANTO LAS COLUMNAS (COLUMN) COMO LAS FILAS (ROW) NO PERMITEN SCROLL -> AJUSTAN EL TAMAÑO DE TODOS LOS ELEMENTOS QUE LE INCLUYEN PARA MOSTRARLOS EN LA PANTALLA
+      body: Row(
+        mainAxisAlignment: MainAxisAlignment
+            .spaceEvenly, // gestiona la separación entre columnas
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment
+                .start, // gestiona la separación entre los elementos de la columna
+            children: const [
+              Icon(Icons.home, color: Colors.amber),
+              Icon(Icons.android, color: Colors.amber),
+              Icon(Icons.build, color: Colors.amber),
+              Icon(Icons.phone, color: Colors.amber),
+              Icon(Icons.group, color: Colors.amber),
+            ],
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: const [
+              Icon(Icons.home, color: Colors.deepOrange),
+              Icon(Icons.android, color: Colors.deepOrange),
+              Icon(Icons.build, color: Colors.deepOrange),
+              Icon(Icons.phone, color: Colors.deepOrange),
+              Icon(Icons.group, color: Colors.deepOrange),
+            ],
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              Icon(Icons.home, color: Colors.blue),
+              Icon(Icons.android, color: Colors.blue),
+              Icon(Icons.build, color: Colors.blue),
+              Icon(Icons.phone, color: Colors.blue),
+              Icon(Icons.group, color: Colors.blue),
+            ],
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: const [
+              Icon(Icons.home, color: Colors.red),
+              Icon(Icons.android, color: Colors.red),
+              Icon(Icons.build, color: Colors.red),
+              Icon(Icons.phone, color: Colors.red),
+              Icon(Icons.group, color: Colors.red),
+            ],
+          )
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
           backgroundColor: Colors.red,
@@ -295,18 +315,6 @@ class _MyHomePageState extends State<MyHomePage> {
           break;
         default:
       }
-    });
-  }
-
-  void _pasoSiguiente() {
-    setState(() {
-      _currentStep++;
-    });
-  }
-
-  void _pasoAnterior() {
-    setState(() {
-      _currentStep--;
     });
   }
 }
